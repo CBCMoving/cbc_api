@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TransmissionResponse>
+    <TransmissionId>123456</TransmissionId>
+    <ResponseGeneratedLocal>2015-05-13T16:55:06.863-05:00</ResponseGeneratedLocal>
+    <ResponseGeneratedUTC>2015-05-13T16:55:06.863-05:00</ResponseGeneratedUTC>
+    <Errors>
+        <Error>
+            <ErrorID>Pieces</ErrorID>
+            <ErrorDescription>Pieces can not be empty.</ErrorDescription>
+        </Error>
+    </Errors>
+</TransmissionResponse>
