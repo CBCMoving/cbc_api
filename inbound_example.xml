@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Transmission>
-    <TransmissionId>123456</TransmissionId>
+    <TransmissionID>123456</TransmissionID>
     <TransmissionLocalDateTime>2015-05-13T16:55:06.863-05:00</TransmissionLocalDateTime>
     <TransmissionUTCDateTime>2015-05-13T11:55:06.863Z</TransmissionUTCDateTime>
     <TransmissionAuthorization>
@@ -17,7 +17,7 @@
     </ControlNumbers>
     <ServiceType>WG</ServiceType>
     <ServiceDescription>Service Descr.</ServiceDescription>
-    <ManifestType>Delivery</ManifestType>
+    <ShipmentType>Delivery</ShipmentType>
     <Dates>
         <ReadyDateTime>2015-12-24 08:00:00</ReadyDateTime>
         <DeliveryDate>2015-12-30</DeliveryDate>
@@ -85,7 +85,7 @@
         </Piece>
         <Piece>
             <PieceID>456791</PieceID>
-            <PieceQty>2</PieceQty>
+            <PieceQuantity>2</PieceQuantity>
             <PieceCartons>4</PieceCartons>
             <PieceWeight>94</PieceWeight>
             <PieceLength>7</PieceLength>
