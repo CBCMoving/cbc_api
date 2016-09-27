@@ -8,35 +8,35 @@ On this way all interaction with company occurs on company's ftp server. Company
 > After successful processing xml will be removed from inbound dir on ftp server. Response xml will be uploaded in outbound dir on ftp server.
 
 #### POST:
-On this way company give unique url for requests, username, password. Xml data transmitted in body of request with POST method. Also should be transmitted the header: `Content-Type: application/xml`. Response also have xml format. For POST way is required [authenticate]().
+On this way company give unique url for requests, username, password. Xml data transmitted in body of request with POST method. Also should be transmitted the header: `Content-Type: application/xml`. Response also have xml format. For POST way is required [Authenticate](https://github.com/CBCMoving/cbc_api#authenticate-only-post-way-api).
 ### Contents:
-* [Transmission]()
-* [Authenticate]()
-* [Control numbers]()
-* [Shipment]()
-* [Dates]()
-* [Ship From]()
-* [Ship To]()
-* [Pieces]()
-    * [Barcodes]() 
-* [Special services]()
-* [Summary]()
-* [Examples]()
+* [Transmission](https://github.com/CBCMoving/cbc_api#transmission)
+* [Authenticate](https://github.com/CBCMoving/cbc_api#authenticate-only-post-way-api)
+* [Control numbers](https://github.com/CBCMoving/cbc_api#control-numbers)
+* [Shipment](https://github.com/CBCMoving/cbc_api#shipment)
+* [Dates](https://github.com/CBCMoving/cbc_api#dates)
+* [Ship From](https://github.com/CBCMoving/cbc_api#shipfrom)
+* [Ship To](https://github.com/CBCMoving/cbc_api#shipto)
+* [Pieces](https://github.com/CBCMoving/cbc_api#pieces)
+    * [Barcodes](https://github.com/CBCMoving/cbc_api#barcodes) 
+* [Special services](https://github.com/CBCMoving/cbc_api#specialservices)
+* [Summary](https://github.com/CBCMoving/cbc_api#symmary)
+* [Examples](https://github.com/CBCMoving/cbc_api#examples)
 
-### Transmission:
+### Transmission ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L3)):
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `TransmmissionID` | STRING | ***Yes*** | Unique identifier for each request (used for debug).
 `TransmissionLocalDateTime` | STRING | ***No*** | Local DateTime in ATOM format when xml was generated.
 `TransmissionUTCDateTime` | STRING | ***Yes*** | DateTime in ATOM format with UTC+0 offset when xml was generated.
 
-### Authenticate (Only POST way api):
+### Authenticate (Only POST way api) ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L6)):
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `UserName` | STRING | ***Yes*** | Username given by CBC administrator.
 `PasswordHash` | STRING | ***Yes*** | Hash type is sha1. Separator is `|`. Hashed from all following information: *TransmissionUTCDateTime*, *TransmissionID*, *original password given by CBC administrator*. `sha1(TransmissionUTCDateTime|TransmissionID|password)`
 
-### Control numbers:
+### Control numbers ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L10)):
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `BOL` | STRING | ***Yes*** | Billing order landing (unique order identifier per company) (Max length ***100*** characters).
@@ -46,20 +46,20 @@ Property | Type | Required | Description
 `OfficeID` | INTEGER | ***Yes*** | Office identifier: 1 - `Portland`, 2 - `Kent`, 3 - `Spokane`.
 `Deluxe` | BOOLEAN | ***No*** | Is deluxe order. May be `0` or `1`. Default `0`.
 
-### Shipment:
+### Shipment ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L18)):
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `ServiceType` | STRING | ***No*** | Type of service. May be `WG`, `T`, `RC`. *WG - White Glove - Inside delivery to any floor with room of choice, unpack placement, debris removal, and up to 30 min of assembly.* *T - Threshold - Delivered to the threshold, or first dry area.* *RC - Room of Choice - Inside delivery to any floor with room of choice.*
 `ServiceDescription` | STRING | ***No*** | Description of service (Max length ***1000*** characters).
 `ShipmentType` | STRING | ***Yes*** | Shipment type. May be `Delivery`, `Pickup`, `Transfer`.
 
-### Dates:
+### Dates ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L21)):
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `ReadyDateTime` | STRING | ***No*** | Ready date time. Format: `Y-m-d H:i A` (*2016-01-15 10:10 AM*)
 `DeliveryDate` | STRING | ***No*** | Delivery date. Format: `Y-m-d` (*2016-01-15*)
 
-### ShipFrom:
+### ShipFrom ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L25)):
 > If shipment type is `Puckup`, then  `ShipFrom` information will be saved.
 
 Property | Type | Required | Description
@@ -75,7 +75,7 @@ Property | Type | Required | Description
 `FromPhoneOther` | STRING | ***No*** | Other phone number. Format: `999-999-9999` or `999-999-9999 9999` (Max length ***20*** characters).
 `FromEmail` | STRING | ***No*** | Email address (Max length ***200*** characters).
 
-### ShipTo:
+### ShipTo ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L37)):
 > If shipment type is `Delivery` or `Transfer`, then  `ShipTo` information will be saved.
 
 Property | Type | Required | Description
@@ -94,7 +94,7 @@ Property | Type | Required | Description
 ### BillTo:
 *In future...*
 
-### Pieces:
+### Pieces ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L62)):
 > Numbers of pieces may be from 1 to 300. if you upgrade an existing order in which there are missing pieces in xml file, this pieces will be deleted from order.
 
 Property | Type | Required | Description
@@ -110,7 +110,7 @@ Property | Type | Required | Description
 `PieceDescription` | STRING | ***No*** | Description of piece (Max length ***1000*** characters).
 `Barcodes` | [] | ***No*** | List of barcodes. [See below &#8595;]()
 
-##### Barcodes:
+##### Barcodes ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L74)):
 > Barcodes are not mandatory.
 
 Property | Type | Required | Description
@@ -118,7 +118,7 @@ Property | Type | Required | Description
 `BarcodeType` | STRING | ***Yes*** | Type of barcode (Max length ***50*** characters). 
 `BarcodeNumber` | STRING | ***Yes*** | Barcode number (Max length ***50*** characters). 
 
-### SpecialServices:
+### SpecialServices ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L108)):
 > In `SpecialService` is sent additional information of order. Such as: **additional services, order notes, special instructions, etc**.
 
 Property | Type | Required | Description
@@ -126,7 +126,7 @@ Property | Type | Required | Description
 `ServiceTypeName` | STRING | ***Yes*** | Name of service type (Max length ***300*** characters).
 `ServiceTypeDescription` | STRING | ***No*** | Description of service type (Max length ***4000*** characters).
 
-### Symmary:
+### Symmary ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L122)):
 > In summary transmitted overall information of all pieces.
 
 Property | Type | Required | Description
