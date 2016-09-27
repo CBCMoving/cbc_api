@@ -1,14 +1,28 @@
 # CBC orders api
+For interaction with CBC API  provided two ways:
+* FTP
+* POST
 
-## Examples:
+#### FTP:
+On this way all interaction with company occurs on company's ftp server. Company provide data from ftp account (username,  password, server, workdir). Collecting and processing xml files will be runned across crontab. All xml files in inbound dir will be processing.
+> After successful processing xml will be removed from inbound dir on ftp server. Response xml will be uploaded in outbound dir on ftp server.
 
-Example | Xml
-------- | ---
-Inbound example | [inbound_example.xml](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml)
-Successful response | [successful_response.xml](https://github.com/CBCMoving/cbc_api/blob/master/successful_response.xml)
-Failure response | [failure_response.xml](https://github.com/CBCMoving/cbc_api/blob/master/failure_response.xml)
+#### POST:
+On this way company give unique url for requests, username, password. Xml data transmitted in body of request with POST method. Also should be transmitted the header: `Content-Type: application/xml`. Response also have xml format. For POST way is required [authenticate]().
+### Contents:
+* [Transmission]()
+* [Authenticate]()
+* [Control numbers]()
+* [Shipment]()
+* [Dates]()
+* [Ship From]()
+* [Ship To]()
+* [Pieces]()
+    * [Barcodes]() 
+* [Special services]()
+* [Summary]()
+* [Examples]()
 
-## Documentation:
 ### Transmission:
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
@@ -25,10 +39,10 @@ Property | Type | Required | Description
 ### Control numbers:
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
-`BOL` | STRING | ***Yes*** | Billing order landing (unique order identifier per company). Length max 100 characters.
-`PO` | STRING | ***No*** | Purchase Order Number. It is merely informational. Length max 100 characters.
-`SO` | STRING | ***No*** | Sales Order Number. It is merely informational. Length max 100 characters.
-`RMA` | STRING | ***No*** | Return Merchandise Authorization Number. It is merely informational. Length max 100 characters.
+`BOL` | STRING | ***Yes*** | Billing order landing (unique order identifier per company) (Max length ***100*** characters).
+`PO` | STRING | ***No*** | Purchase Order Number. It is merely informational (Max length ***100*** characters).
+`SO` | STRING | ***No*** | Sales Order Number. It is merely informational (Max length ***100*** characters).
+`RMA` | STRING | ***No*** | Return Merchandise Authorization Number. It is merely informational (Max length ***100*** characters).
 `OfficeID` | INTEGER | ***Yes*** | Office identifier: 1 - `Portland`, 2 - `Kent`, 3 - `Spokane`.
 `Deluxe` | BOOLEAN | ***No*** | Is deluxe order. May be `0` or `1`. Default `0`.
 
@@ -36,7 +50,7 @@ Property | Type | Required | Description
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `ServiceType` | STRING | ***No*** | Type of service. May be `WG`, `T`, `RC`. *WG - White Glove - Inside delivery to any floor with room of choice, unpack placement, debris removal, and up to 30 min of assembly.* *T - Threshold - Delivered to the threshold, or first dry area.* *RC - Room of Choice - Inside delivery to any floor with room of choice.*
-`ServiceDescription` | STRING | ***No*** | Description of service. Length max 1000 characters.
+`ServiceDescription` | STRING | ***No*** | Description of service (Max length ***1000*** characters).
 `ShipmentType` | STRING | ***Yes*** | Shipment type. May be `Delivery`, `Pickup`, `Transfer`.
 
 ### Dates:
@@ -46,15 +60,86 @@ Property | Type | Required | Description
 `DeliveryDate` | STRING | ***No*** | Delivery date. Format: `Y-m-d` (*2016-01-15*)
 
 ### ShipFrom:
+> If shipment type is `Puckup`, then  `ShipFrom` information will be saved.
+
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
-`FromName` | STRING | On shipment type: `Pickup` | Customer name. Length max 200 characters.
-`FromAddress1` | STRING | On shipment type: `Pickup` | Address1. Length max 300 characters.
-`FromAddress2` | STRING | ***No*** | Address2. Length max 300 characters.
-`FromCity` | STRING | On shipment type: `Pickup` | City name. Length max 150 characters.
+`FromName` | STRING | On shipment type: `Pickup` | Customer name (Max length ***200*** characters).
+`FromAddress1` | STRING | On shipment type: `Pickup` | Address1 (Max length ***300*** characters).
+`FromAddress2` | STRING | ***No*** | Address2 (Max length ***300*** characters).
+`FromCity` | STRING | On shipment type: `Pickup` | City name (Max length ***150*** characters).
 `FromState` | STRING | On shipment type: `Pickup` | Short name of state. Two characters in uppercase.
-`FromZip` | INTEGER | On shipment type: `Pickup` | Number length 6 symbols (`123456`)
+`FromZip` | INTEGER | On shipment type: `Pickup` | Number length ***6*** symbols (`123456`)
 `FromCountry` | STRING | ***No*** | Name of country.
-`FromPhone` | STRING | On shipment type: `Pickup` | Primary phone number. Format: `999-999-9999` or `999-999-9999 9999`
-`OtherPhone` | STRING | ***No*** | Other phone number. Format: `999-999-9999` or `999-999-9999 9999`
-`FromEmail` | STRING | ***No*** | Email address.
+`FromPhone` | STRING | On shipment type: `Pickup` | Primary phone number. Format: `999-999-9999` or `999-999-9999 9999` (Max length ***20*** characters).
+`FromPhoneOther` | STRING | ***No*** | Other phone number. Format: `999-999-9999` or `999-999-9999 9999` (Max length ***20*** characters).
+`FromEmail` | STRING | ***No*** | Email address (Max length ***200*** characters).
+
+### ShipTo:
+> If shipment type is `Delivery` or `Transfer`, then  `ShipTo` information will be saved.
+
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`ToName` | STRING | On shipment type: `Delivery` or `Transfer` | Customer name (Max length ***200*** characters).
+`ToAddress1` | STRING | On shipment type: `Delivery` or `Transfer` | Address1 (Max length ***300*** characters).
+`ToAddress2` | STRING | ***No*** | Address2 (Length max ***300*** characters).
+`ToCity` | STRING | On shipment type: `Delivery` or `Transfer` | City name (Max length ***150*** characters).
+`ToState` | STRING | On shipment type: `Delivery` or `Transfer` | Short name of state. Two characters in uppercase.
+`ToZip` | INTEGER | On shipment type: `Delivery` or `Transfer` | Zip number length ***6*** symbols (`123456`)
+`ToCountry` | STRING | ***No*** | Name of country.
+`ToPhone` | STRING | On shipment type: `Delivery` or `Transfer` | Primary phone number. Format: `999-999-9999` or `999-999-9999 9999` (Max length ***20*** characters).
+`ToPhoneOther` | STRING | ***No*** | Other phone number. Format: `999-999-9999` or `999-999-9999 9999` (Max length ***20*** characters).
+`ToEmail` | STRING | ***No*** | Email address (Max length ***200*** characters).
+
+### BillTo:
+*In future...*
+
+### Pieces:
+> Numbers of pieces may be from 1 to 300. if you upgrade an existing order in which there are missing pieces in xml file, this pieces will be deleted from order.
+
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`PieceID` | STRING | ***Yes*** | Identifier of piece is unique per company (Max length ***50*** characters). 
+`PieceQuantity` | INTEGER | ***Yes*** | Quantity of piece.
+`PieceCartons` | INTEGER | ***Yes*** | Quantity of cartons.
+`PieceWeight` | INTEGER | ***Yes*** | The width, in inches, of a a piece represented by this line.
+`PieceLength` | INTEGER | ***Yes*** | The length, in inches, of a a piece represented by this line.
+`PieceHeight` | INTEGER | ***Yes*** | The height, in inches, of a a piece represented by this line.
+`PieceCommodity` | STRING | ***No*** | Commodity type (Max length ***300*** characters).
+`PieceModel` | STRING | ***No*** | Model of commodity (Max length ***300*** characters)
+`PieceDescription` | STRING | ***No*** | Description of piece (Max length ***1000*** characters).
+`Barcodes` | [] | ***No*** | List of barcodes. [See below &#8595;]()
+
+##### Barcodes:
+> Barcodes are not mandatory.
+
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`BarcodeType` | STRING | ***Yes*** | Type of barcode (Max length ***50*** characters). 
+`BarcodeNumber` | STRING | ***Yes*** | Barcode number (Max length ***50*** characters). 
+
+### SpecialServices:
+> In `SpecialService` is sent additional information of order. Such as: **additional services, order notes, special instructions, etc**.
+
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`ServiceTypeName` | STRING | ***Yes*** | Name of service type (Max length ***300*** characters).
+`ServiceTypeDescription` | STRING | ***No*** | Description of service type (Max length ***4000*** characters).
+
+### Symmary:
+> In summary transmitted overall information of all pieces.
+
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`TotalPieces` | INTEGER | ***Yes*** | Number of pieces.
+`TotalCartons` | INTEGER | ***Yes*** | Number of cartons.
+`TotalWeight` | INTEGER | ***Yes*** | Overall weight.
+
+
+## Examples:
+
+Example | Xml
+------- | ---
+Inbound example | [inbound_example.xml](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml)
+Successful response | [successful_response.xml](https://github.com/CBCMoving/cbc_api/blob/master/successful_response.xml)
+Failure response | [failure_response.xml](https://github.com/CBCMoving/cbc_api/blob/master/failure_response.xml)
