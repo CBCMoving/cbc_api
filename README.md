@@ -108,7 +108,7 @@ Property | Type | Required | Description
 `PieceCommodity` | STRING | ***No*** | Commodity type (Max length ***300*** characters).
 `PieceModel` | STRING | ***No*** | Model of commodity (Max length ***300*** characters)
 `PieceDescription` | STRING | ***No*** | Description of piece (Max length ***1000*** characters).
-`Barcodes` | [] | ***No*** | List of barcodes. [See below &#8595;]()
+`Barcodes` | [] | ***No*** | List of barcodes. [See below &#8595;](https://github.com/CBCMoving/cbc_api#barcodes-see)
 
 ##### Barcodes ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L74)):
 > Barcodes are not mandatory.
