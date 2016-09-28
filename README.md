@@ -4,7 +4,7 @@ For interaction with CBC API  provided two ways:
 * POST
 
 #### FTP:
-On this way all interaction with company occurs on company's ftp server. Company provide data from ftp account (username,  password, server, workdir). Collecting and processing xml files will be runned across crontab. All xml files in inbound dir will be processing.
+On this way all interaction with company occurs on company's ftp server. Company provides data from ftp account (username,  password, server, workdir). Collecting and processing xml files will be runned across crontab. All xml files in inbound dir will be processing.
 > After successful processing xml will be removed from inbound dir on ftp server. Response xml will be uploaded in outbound dir on ftp server.
 
 #### POST:
