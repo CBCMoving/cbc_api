@@ -7,6 +7,26 @@ For interaction with CBC API  provided two ways:
 On this way all interaction with company occurs on company's ftp server. Company provides data from ftp account (username,  password, server, workdir). Collecting and processing xml files will be runned across crontab. All xml files in inbound dir will be processing.
 > After successful processing xml will be removed from inbound dir on ftp server. Response xml will be uploaded in outbound dir on ftp server.
 
+Example directory tree of ftp server:
+* outgoung
+* reponses
+* statuses
+* errors
+    * outgoing
+    * responses
+
+> Directories: `outgoing`,` responses`, `statuses` is customizable by ftp provider. But `errors/outgoing`, `errors/responses` is required on ftp tree.
+
+`outgoing` contains outbound xml files for processing in cbc.
+
+`responses` contains xml files with result of processing outgoing files. Filename equals outbound filename.
+
+`statuses` in future...
+
+`errors/outgoing` contains outgoing files with validation error. Invalid file has be moved from outgoing directory.
+
+`errors/responses` contains result of processing invalid files.
+
 #### POST:
 On this way company give unique url for requests, username, password. Xml data transmitted in body of request with POST method. Also should be transmitted the header: `Content-Type: application/xml`. Response also have xml format. For POST way is required [Authenticate](https://github.com/CBCMoving/cbc_api#authenticate-only-post-way-api).
 ### Contents:
