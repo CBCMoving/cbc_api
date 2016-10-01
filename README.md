@@ -1,4 +1,4 @@
-# CBC orders api
+# CBC orders EDI
 For interaction with CBC API  provided two ways:
 * FTP
 * POST
