@@ -13,7 +13,7 @@ Example directory tree of ftp server:
 * statuses
 * errors
 
-> Directories: `outgoing`,` responses`, `statuses` is customizable by ftp provider. But `errors/outgoing`, `errors/responses` is required on ftp tree.
+> Directories: `outgoing`,` responses`, `statuses` is customizable by ftp provider. But `errors` is required on ftp tree.
 
 `outgoing` contains outbound xml files for processing in cbc.
 
