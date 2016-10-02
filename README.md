@@ -12,8 +12,6 @@ Example directory tree of ftp server:
 * reponses
 * statuses
 * errors
-    * outgoing
-    * responses
 
 > Directories: `outgoing`,` responses`, `statuses` is customizable by ftp provider. But `errors/outgoing`, `errors/responses` is required on ftp tree.
 
@@ -23,9 +21,7 @@ Example directory tree of ftp server:
 
 `statuses` in future...
 
-`errors/outgoing` contains outgoing files with validation error. Invalid file has be moved from outgoing directory.
-
-`errors/responses` contains result of processing invalid files.
+`errors` contains outgoing files with validation error. Invalid file has be moved from outgoing directory.
 
 #### POST:
 On this way company give unique url for requests, username, password. Xml data transmitted in body of request with POST method. Also should be transmitted the header: `Content-Type: application/xml`. Response also have xml format. For POST way is required [Authenticate](https://github.com/CBCMoving/cbc_api#authenticate-only-post-way-api).
@@ -110,9 +106,6 @@ Property | Type | Required | Description
 `ToPhone` | STRING | On shipment type: `Delivery` or `Transfer` | Primary phone number. Format: `999-999-9999` or `999-999-9999 9999` (Max length ***20*** characters).
 `ToPhoneOther` | STRING | ***No*** | Other phone number. Format: `999-999-9999` or `999-999-9999 9999` (Max length ***20*** characters).
 `ToEmail` | STRING | ***No*** | Email address (Max length ***200*** characters).
-
-### BillTo:
-*In future...*
 
 ### Pieces ([see](https://github.com/CBCMoving/cbc_api/blob/master/inbound_example.xml#L62)):
 > Numbers of pieces may be from 1 to 300. if you upgrade an existing order in which there are missing pieces in xml file, this pieces will be deleted from order.

@@ -46,19 +46,6 @@
         <ToPhoneOther>503-456-1237</ToPhoneOther>
         <ToEmail>davidkinz@gmail.com</ToEmail>
     </ShipTo>
-    <BillTo>
-        <BillName>Your Company Name</BillName>
-        <BillId></BillId>
-        <BillAddress1>234 Something Ave.</BillAddress1>
-        <BillAddress2></BillAddress2>
-        <BillCity>City</BillCity>
-        <BillSate>State</BillSate>
-        <BillZip>97000</BillZip>
-        <BillCountry>USA</BillCountry>
-        <BillPhone>xxx-xxx-xxxx</BillPhone>
-        <BillAltPhone></BillAltPhone>
-        <BillEmail>your@email.com</BillEmail>
-    </BillTo>
     <Pieces>
         <Piece>
             <PieceID>456789</PieceID>
