@@ -1,5 +1,5 @@
-# CBC orders EDI
-For interaction with CBC EDI  provided two ways:
+# CBC Moving EDI Documentation
+There are two ways to interact with CBC Moving EDI system: 
 * FTP
 * POST
 
