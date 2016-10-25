@@ -4,16 +4,16 @@ There are two ways to interact with CBC Moving EDI system:
 * POST
 
 #### FTP:
-On this way all interaction with company occurs on company's ftp server. Company provides data from ftp account (username,  password, server, workdir). Collecting and processing xml files will be runned across crontab. All xml files in inbound dir will be processing.
-> After successful processing xml will be removed from inbound dir on ftp server. Response xml will be uploaded in outbound dir on ftp server.
+This way all interaction with company occurs on company's ftp server. Company provides data for ftp account (username,  password, server, workdir). Collecting and processing XML files will be runned across crontab. All XML files from outbound dir will be processed.
+> After successful processing xml will be removed from outbound dir on ftp server. Response XMLs will be uploaded in inbound (responses) dir on ftp server.
 
 Example directory tree of ftp server:
 * outgoung
-* reponses
+* responses
 * statuses
 * errors
 
-> Directories: `outgoing`,` responses`, `statuses` is customizable by ftp provider. But `errors` is required on ftp tree.
+> Directories: `outgoing`,` responses`, `statuses` is customizable by ftp provider. But folder `errors` is required in ftp tree.
 
 `outgoing` contains outbound xml files for processing in cbc.
 
