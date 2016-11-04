@@ -1,5 +1,5 @@
 # CBC Moving EDI Documentation
-There are two ways to interact with CBC Moving EDI system: 
+There are two interaction ways to communicate with CBC Moving EDI system: 
 * FTP
 * POST
 
