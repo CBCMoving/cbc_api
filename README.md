@@ -24,20 +24,20 @@ Example directory tree of ftp server:
 `errors` contains outgoing files with validation error. Invalid file has be moved from outgoing directory.
 
 #### POST:
-On this way company give unique url for requests, username, password. Xml data transmitted in body of request with POST method. Also should be transmitted the header: `Content-Type: application/xml`. Response also have xml format. For POST way is required [Authenticate](https://github.com/CBCMoving/cbc_edi#authenticate-only-post-way-api).
+On this way company give unique url for requests, username, password. Xml data transmitted in body of request with POST method. Also should be transmitted the header: `Content-Type: application/xml`. Response also have xml format. For POST way is required [Authenticate](https://github.com/CBCMoving/cbc_edi#authenticate-only-post-way-api-see).
 ### Contents:
-* [Transmission](https://github.com/CBCMoving/cbc_edi#transmission)
-* [Authenticate](https://github.com/CBCMoving/cbc_edi#authenticate-only-post-way-api)
-* [Control numbers](https://github.com/CBCMoving/cbc_edi#control-numbers)
-* [Shipment](https://github.com/CBCMoving/cbc_edi#shipment)
-* [Dates](https://github.com/CBCMoving/cbc_edi#dates)
-* [Ship From](https://github.com/CBCMoving/cbc_edi#shipfrom)
-* [Ship To](https://github.com/CBCMoving/cbc_edi#shipto)
-* [Pieces](https://github.com/CBCMoving/cbc_edi#pieces)
-    * [Barcodes](https://github.com/CBCMoving/cbc_edi#barcodes) 
-* [Special services](https://github.com/CBCMoving/cbc_edi#specialservices)
-* [Summary](https://github.com/CBCMoving/cbc_edi#symmary)
-* [Examples](https://github.com/CBCMoving/cbc_edi#examples)
+* [Transmission](https://github.com/CBCMoving/cbc_edi#transmission-see)
+* [Authenticate](https://github.com/CBCMoving/cbc_edi#authenticate-only-post-way-api-see)
+* [Control numbers](https://github.com/CBCMoving/cbc_edi#control-numbers-see)
+* [Shipment](https://github.com/CBCMoving/cbc_edi#shipment-see)
+* [Dates](https://github.com/CBCMoving/cbc_edi#dates-see)
+* [Ship From](https://github.com/CBCMoving/cbc_edi#shipfrom-see)
+* [Ship To](https://github.com/CBCMoving/cbc_edi#shipto-see)
+* [Pieces](https://github.com/CBCMoving/cbc_edi#pieces-see)
+    * [Barcodes](https://github.com/CBCMoving/cbc_edi#barcodes-see) 
+* [Special services](https://github.com/CBCMoving/cbc_edi#specialservices-see)
+* [Summary](https://github.com/CBCMoving/cbc_edi#symmary-see)
+* [Examples](https://github.com/CBCMoving/cbc_edi#examples-see)
 
 ### Transmission ([see](https://github.com/CBCMoving/cbc_edi/blob/master/inbound_example.xml#L3)):
 Property | Type | Required | Description
